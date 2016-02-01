@@ -131,9 +131,9 @@ bool LinkedList<T>::removeBack()
 	*/
         int track = 0;
         
-        if (!isEmpty())
+        if (!isEmpty()) //check if list is empty
         {
-            lastNode = m_front;
+            lastNode = m_front; //start point
             secondintoLast = m_front;
             
             //find the end of the list
@@ -149,7 +149,7 @@ bool LinkedList<T>::removeBack()
             //have the second to last Node now point to nullptr
             secondintoLast->setNext(nullptr);
             
-            //delete the final Node
+            //delete the final Node (no memory leaks)
             delete lastNode;
             //decrement size of list
             m_size--;
