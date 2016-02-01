@@ -32,7 +32,7 @@ int LinkedList<T>::size() const
 	/** TODO 
 		Fix this method
 	*/
-	return(0);
+	return(m_size); //done
 }
 
 template <typename T>
@@ -44,7 +44,27 @@ bool LinkedList<T>::search(T value) const
 	/** TODO 
 		Fix this method
 	*/
-
+        if (temp != nullptr) //check to see if there is an existing Node
+        {
+            do 
+            {
+                if (temp->getValue() == value)
+                {   //found value
+                    isFound = true; 
+                    break;
+                }            
+                else
+                    temp = temp->getNext(); //get next Node
+            } while (temp->getNext() != nullptr);
+            
+            if (temp->getValue() == value) //found value
+                isFound = true; 
+            else
+                isFound = false; 
+        }
+        else
+            isFound = false; 
+        
 	return(isFound);
 }
 
@@ -106,7 +126,37 @@ bool LinkedList<T>::removeBack()
 	/** TODO 
 		Fix this method
 	*/
-
+        int track = 0;
+        
+        if (!isEmpty())
+        {
+            lastNode = m_front;
+            secondintoLast = m_front;
+            
+            //find the end of the list
+            while (lastNode->getNext() != nullptr)
+            {
+                lastNode = lastNode->getNext(); //get next pointer
+                track++; //track current position in list
+            }
+            //find second to last Node
+            for(int i = 1; i < track; i++)
+                secondintoLast = secondintoLast->getNext(); 
+            
+            //have the second to last Node now point to nullptr
+            secondintoLast->setNext(nullptr);
+            
+            //delete the final Node
+            delete lastNode;
+            //decrement size of list
+            m_size--;
+            //return true for successful removal
+            isRemoved = true;
+        }
+        //return false for empty list
+        else
+            isRemoved = false;
+        
 	return(isRemoved);
 }	
 
