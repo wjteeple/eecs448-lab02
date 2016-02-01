@@ -32,7 +32,8 @@ int LinkedList<T>::size() const
 	/** TODO 
 		Fix this method
 	*/
-	return(m_size); //done
+        
+	return(m_size); //return member variabe value for list size
 }
 
 template <typename T>
@@ -46,6 +47,7 @@ bool LinkedList<T>::search(T value) const
 	*/
         if (temp != nullptr) //check to see if there is an existing Node
         {
+            //loop until the end of the list is reached
             do 
             {
                 if (temp->getValue() == value)
@@ -55,13 +57,14 @@ bool LinkedList<T>::search(T value) const
                 }            
                 else
                     temp = temp->getNext(); //get next Node
-            } while (temp->getNext() != nullptr);
+            } while (temp->getNext() != nullptr); 
             
             if (temp->getValue() == value) //found value
                 isFound = true; 
-            else
+            else //value is not in the list
                 isFound = false; 
         }
+        //list is empty
         else
             isFound = false; 
         
